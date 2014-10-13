@@ -1,12 +1,14 @@
 var express = require("express");
+//var mongojs = require("mongojs");
 var app = express();
+//var db = mongojs("fisrt", ["serviceClients"]);
 
 
 ipaddress = process.env.OPENSHIFT_NODEJS_IP ||"127.0.0.1";
 port      = process.env.OPENSHIFT_NODEJS_PORT || 3000; 
 
-app.get("/hello", function(req, res){
-    res.send("hello world");
+app.get("/env", function(req, res){
+    res.json(process.env);
 });
 
 
