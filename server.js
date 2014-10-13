@@ -12,7 +12,7 @@ if(typeof process.env.OPENSHIFT_MONGODB_DB_URL == "undefined"){
     mongodbConnectionString = "applications";
 }
 
-var db = mongojs("mongodbConnectionString", ["serviceClients"]);
+var db = mongojs(mongodbConnectionString, ["serviceClients"]);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP ||"127.0.0.1";
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000; 
@@ -51,6 +51,7 @@ app.delete("/serviceClients/:id", function (req, res) {
         res.json(doc);
     });
 });
+
 app.put("/serviceClients/:id", function (req, res) {
     
     db.serviceClients.update({_id : mongojs.ObjectId(req.body._id)}, 
@@ -60,7 +61,6 @@ app.put("/serviceClients/:id", function (req, res) {
         });
 
 });
-
 
 
 app.listen(port, ipaddress);
